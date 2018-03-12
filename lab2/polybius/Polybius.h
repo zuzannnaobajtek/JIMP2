@@ -1,0 +1,10 @@
+//
+// Created by Zuza on 2018-03-12.
+//
+
+#ifndef JIMP_EXERCISES_POLYBIUS_H
+#define JIMP_EXERCISES_POLYBIUS_H
+
+
+
+#endif //JIMP_EXERCISES_POLYBIUS_H
