@@ -7,7 +7,7 @@
 #include <map>
 #include <string>
 #include <MemLeakTest.h>
-#include <TinyUrl.h>
+#include <Tinyurl.h>
 
 using ::std::string;
 using ::std::unique_ptr;
