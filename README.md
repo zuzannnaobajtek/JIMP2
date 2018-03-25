@@ -1,7 +1,11 @@
 ### C++ programming classes problmes ###
 
 [![Build Status](https://travis-ci.org/zuzannnaobajtek/jimp2.svg?branch=master)](https://travis-ci.org/zuzannnaobajtek/jimp2)
+<<<<<<< HEAD
 [![Build status](https://ci.appveyor.com/api/projects/status/tcutlv3sw6thyoy1?svg=true)](https://ci.appveyor.com/project/zuzannnaobajtek/jimp2)
+=======
+[![Build status](https://ci.appveyor.com/api/projects/status/39thleljhjmtof0t?svg=true)](https://ci.appveyor.com/project/micwypych/cpp-exercises)
+>>>>>>> 1fd8dcfb48dd0a33b6588836c32460221e60b567
 
 After cloning please replace badges with your project's badges
 
