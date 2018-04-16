@@ -123,7 +123,6 @@ int datastructures::WordCounter::TotalWords() {
 }
 
 void datastructures::WordCounter::FromInputStream(std::ifstream &is) {
-
 }
 
 int datastructures::WordCounter::operator[](string name) {

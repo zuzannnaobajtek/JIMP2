@@ -65,7 +65,6 @@ namespace datastructures {
         ~WordCounter();
 
     };
-
     std::ostream &operator<<(std::ostream &os, WordCounter &counter);
 }
 
