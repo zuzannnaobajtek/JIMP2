@@ -1,8 +1,7 @@
 
 project(zad8)
 
-set(HEDEAR_FILES Kolo.h)
-set(HEDEAR_FILES Kula.h)
+set(HEDEAR_FILES Kolo.h Kula.h)
 set(SOURCE_FILES Zad8.cpp)
 
 add_library(libzad8 STATIC ${SOURCE_FILES})
