@@ -2,7 +2,7 @@
 project(zad1)
 
 set(HEDEAR_FILES Zad1.h)
-set(SOURCE_FILES Zad1.cpp)
+set(SOURCE_FILES TestDziedziczenie.cpp)
 
 add_library(libzad1 STATIC ${SOURCE_FILES})
 target_include_directories(libzad1 PUBLIC .)
