@@ -11,7 +11,7 @@
 #include <memory>
 
 typedef struct {
-    std::array<char, 6> array = {{ '0', '0', '0', '0', '0', '0' }};
+    std::array<char, 6> array = { '0', '0', '0', '0', '0', '0' };
     std::array<std::string, 2> shortFullUrl;
 } TinyUrlCodec;
 
