@@ -8,39 +8,110 @@
 #include <string>
 #include <vector>
 
+#include <iostream>
+#include <functional>
+
+using std::string;
+
+
 namespace academia {
     class Serializer;
 
     class Serializable {
+
          virtual std::string Serialize(Serializer *)=0;
     };
 
+
+
     class Serializer {
-        virtual void IntegerField(const std::string &field_name, int value);
-        virtual void DoubleField(const std::string &field_name, double value) ;
-        virtual void StringField(const std::string &field_name, const std::string &value) ;
-        virtual void BooleanField(const std::string &field_name, bool value);
-        virtual void SerializableField(const std::string &field_name, const academia::Serializable &value);
+    public:
+        explicit Serializer(std::ostream* out);
+        virtual ~Serializer() = default;
+        virtual void IntegerField(const std::string &field_name, int value)=0;
+        virtual void DoubleField(const std::string &field_name, double value)=0 ;
+        virtual void StringField(const std::string &field_name, const std::string &value)=0;
+        virtual void BooleanField(const std::string &field_name, bool value)=0;
+        virtual void SerializableField(const std::string &field_name, const academia::Serializable &value)=0;
         virtual void ArrayField(const std::string &field_name,
-                                const std::vector<std::reference_wrapper<const academia::Serializable>> &value);
-        virtual void Header(const std::string &object_name);
-        virtual void Footer(const std::string &object_name);
+                                const std::vector<std::reference_wrapper<const academia::Serializable>> &value)=0;
+        virtual void Header(const std::string &object_name)=0;
+        virtual void Footer(const std::string &object_name)=0;
+
+    protected:
+        std::ostream *out_;
+
     };
 
 
     class Room : public Serializable {
     public:
+
         std::string Serialize(Serializer *) override ;
+
+        enum class Type {
+            COMPUTER_LAB,
+            LECTURE_HALL,
+            CLASSROOM
+        };
+        void Serialize(Serializer *s) const override ;
+        Room(int n, string nam, Type typ);
+        string TypeToString(Type typ) const;
+
+
 
     private:
     int no;
     std::string name;
-    enum Type {
-        COMPUTER_LAB
-    };
+
     };
 
+
+
+
+    class XmlSerializer : public Serializer {
+    public:
+        explicit XmlSerializer(std::ostream *out);
+        void IntegerField(const std::string &field_name, int value) override ;
+        void DoubleField(const std::string &field_name, double value) override ;
+        void StringField(const std::string &field_name, const std::string &value) override ;
+        void BooleanField(const std::string &field_name, bool value) override;
+        void SerializableField(const std::string &field_name, const academia::Serializable &value) override ;
+        void ArrayField(const std::string &field_name,
+                                const std::vector<std::reference_wrapper<const academia::Serializable>> &value) override ;
+        void Header(const std::string &object_name) override ;
+        void Footer(const std::string &object_name) override ;
+    };
+
+    class JsonSerializer : public Serializer {
+    public:
+        explicit JsonSerializer(std::ostream *out);
+        void IntegerField(const std::string &field_name, int value) override ;
+        void DoubleField(const std::string &field_name, double value) override ;
+        void StringField(const std::string &field_name, const std::string &value) override ;
+        void BooleanField(const std::string &field_name, bool value) override;
+        void SerializableField(const std::string &field_name, const academia::Serializable &value) override ;
+        void ArrayField(const std::string &field_name,
+                        const std::vector<std::reference_wrapper<const academia::Serializable>> &value) override ;
+        void Header(const std::string &object_name) override ;
+        void Footer(const std::string &object_name) override ;
+        void IfFirst();
+
+    private:
+        bool first = true;
+    };
+
+    class Building : public Serializable {
+    public:
+        Building(int no, string name, const std::vector<std::reference_wrapper<const academia::Serializable>> &rooms);
+        void Serialize(Serializer *) const override ;
+    private:
+        int no_;
+        string name_;
+        std::vector<std::reference_wrapper<const academia::Serializable>> rooms_;
+    };
 }
 
 
 #endif //JIMP_EXERCISES_SERIALIZATION_H
+
