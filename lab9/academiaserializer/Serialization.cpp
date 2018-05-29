@@ -5,7 +5,6 @@
 #include "Serialization.h"
 
 
-
 string academia::Room::TypeToString(academia::Room::Type typ) const {
     switch (typ) {
 
@@ -150,6 +149,5 @@ void academia::JsonSerializer::ArrayField(const std::string &field_name,
     }
 
     *(out_)<<"]";
-
 
 }

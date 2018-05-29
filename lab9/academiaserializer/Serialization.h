@@ -7,22 +7,18 @@
 
 #include <string>
 #include <vector>
-
 #include <iostream>
 #include <functional>
 
 using std::string;
 
-
 namespace academia {
     class Serializer;
 
     class Serializable {
-
-         virtual std::string Serialize(Serializer *)=0;
+    public:
+        virtual void Serialize(Serializer *) const = 0;
     };
-
-
 
     class Serializer {
     public:
@@ -40,15 +36,11 @@ namespace academia {
 
     protected:
         std::ostream *out_;
-
     };
 
 
     class Room : public Serializable {
     public:
-
-        std::string Serialize(Serializer *) override ;
-
         enum class Type {
             COMPUTER_LAB,
             LECTURE_HALL,
@@ -59,15 +51,11 @@ namespace academia {
         string TypeToString(Type typ) const;
 
 
-
     private:
-    int no;
-    std::string name;
-
+        int no;
+        std::string name;
+        Type type;
     };
-
-
-
 
     class XmlSerializer : public Serializer {
     public:
@@ -78,7 +66,7 @@ namespace academia {
         void BooleanField(const std::string &field_name, bool value) override;
         void SerializableField(const std::string &field_name, const academia::Serializable &value) override ;
         void ArrayField(const std::string &field_name,
-                                const std::vector<std::reference_wrapper<const academia::Serializable>> &value) override ;
+                        const std::vector<std::reference_wrapper<const academia::Serializable>> &value) override ;
         void Header(const std::string &object_name) override ;
         void Footer(const std::string &object_name) override ;
     };
@@ -114,4 +102,3 @@ namespace academia {
 
 
 #endif //JIMP_EXERCISES_SERIALIZATION_H
-
