@@ -26,7 +26,7 @@ namespace factoryMethod {
     }
 
     template <typename T>
-    auto Mean(std::vector<T> v) {
+    double Mean(std::vector<T> v) {
         int a = 0;
         T sum = 0;
         for (int i = 0; i < v.size(); i++) {
